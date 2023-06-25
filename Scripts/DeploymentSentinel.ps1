@@ -322,6 +322,34 @@ function DeployAnalyticalRules {
     })
 }
 
+function ExistingLogAnalytics{
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [TypeName('System.Collections.ArrayList')]
+        $ResourceGroupName = ((Get-AzResourceGroup).ResourceGroupName),
+
+        [Parameter()]
+        [TypeName('System.Collections.ArrayList')]
+        $VirtualMachines = (Get-AzVM -ResourceGroupName $ResourceGroupName.foreach((Get-AzVM).Name)),
+        
+        [Parameter()]
+        [String]
+        $Extension = "MicrosoftMonitoringAgent"
+    )
+    #Create our list of virtual machines that have the log analytics extension installed.
+    $VirtualMachines.ForEach({
+        $VirtualMachine = Get-AzVM -ResourceGroupName $ResourceGroupName -Name $_
+        $VirtualMachine.Extensions.ForEach({
+            if($_.Publisher -eq $Extension){
+                $global:VirtualMachinesWithExtension.add($VirtualMachine.Name)
+            }
+        })
+    })
+    
+    
+}
+
 function ErrorCheck{
     param(
         [Parameter (Mandatory = $true)]
