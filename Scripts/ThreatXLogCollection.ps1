@@ -15,7 +15,7 @@ $StartTime = Get-Date
 
 #This line will need to be removed
 
-$AzureWebJobsStorage = "DefaultEndpointsProtocol=https;AccountName=ntiretymsspprodsent84a4;AccountKey=gU5qqj7E6q6Kjij4fpkMlCBi4ghXIPEKmP8+VbPosIrXn1jdD4F49dsQ9Ev8+60x4dVTeuh8kEbn+ASt6KENmw==;EndpointSuffix=core.windows.net"
+$AzureWebJobsStorage = ""
 
 #Authenticate to ThreatX 
 # Define the URI
